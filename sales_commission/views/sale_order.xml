@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="sale_commission_sale_order_from_view_inherit" model="ir.ui.view">
+            <field name="name">sale_commission_sale_order_from_view_inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+                <field name="payment_term_id" position="after">
+                    <field name="user_id" required="1" widget="many2one_avatar_user"/>
+                    <field name="commission_done" readonly="1" attrs="{'invisible':[('state','=','draft')]}"/>
+
+                </field>
+
+            </field>
+        </record>
+    </data>
+</odoo>

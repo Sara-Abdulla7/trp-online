@@ -1,0 +1,63 @@
+<odoo>
+	<data>
+
+
+
+        <record id="attendance_settings_form_view" model="ir.ui.view">
+            <field name="name">attendance.settings.form.view</field>
+            <field name="model">attendance.settings</field>
+            <field name="arch" type="xml">
+                <form string="Attendance Settings">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="mode"/>
+                                <field name="employee_id" attrs="{'invisible': [('mode', '=', 'department')],'required': [('mode', '=', 'employee')]}"/>
+                                <field name="department_id" attrs="{'invisible': [('mode', '=', 'employee')],'required': [('mode', '=', 'department')]}"/>
+                            </group>
+                            <group>
+                                <field name="delay_time" widget="float_time"/>
+                                <field name="absent_time" widget="float_time"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        
+        <record id="attendance_settings_tree_view" model="ir.ui.view">
+            <field name="name">attendance.settings.tree.view</field>
+            <field name="model">attendance.settings</field>
+            <field name="arch" type="xml">
+                <tree string="Attendance Settings tree">
+                    <field name="employee_id" attrs="{'invisible': [('mode', '=', 'department')],'required': [('mode', '=', 'employee')]}"/>
+                    <field name="department_id" attrs="{'invisible': [('mode', '=', 'employee')],'required': [('mode', '=', 'department')]}"/>
+                    <field name="delay_time" widget="float_time"/>
+                    <field name="absent_time" widget="float_time"/>
+                    <field name="mode" invisible="True"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="attendance_settings_action" model="ir.actions.act_window">
+            <field name="name">Attendance Action</field>
+            <field name="res_model">attendance.settings</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No employees currently
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="attendance_settings_main_menu" name="Attendance Settings" sequence="55" parent="hr_attendance.menu_hr_attendance_root"/>
+
+        <menuitem id="attendance_settings_menu_item" name="Set Attendance Settings" sequence="10" action="attendance_settings_action" parent="attendance_automation.attendance_settings_main_menu"/>
+
+
+    </data>
+        <!-- hr_attendance.menu_hr_attendance_root -->
+</odoo>

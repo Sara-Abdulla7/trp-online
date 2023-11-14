@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--        form view-->
+        <record id="sale_commission_view_form" model="ir.ui.view">
+            <field name="name">sale_commission_view_form</field>
+            <field name="model">sale.commission</field>
+            <field name="arch" type="xml">
+                <form string="Sale Commission From">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box" >
+                            <button type="object" name="action_open_sale_commission_line" class="oe_stat_button"
+                                    icon="fa-users">
+                                <field name="commission_line_count" widget="statinfo" string="Commission Count"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="commission_type" required="1"/>
+<!--                                <field name="commission_type_round" required="1"/>-->
+                                <field name="commission_rate" attrs="{'invisible': [('commission_type','!=','fixed')],'required':[('commission_type','=','fixed')]}"/>
+                                <label for="commission_rate_percentage" attrs="{'invisible': [('commission_type','!=','percentage')],'required':[('commission_type','=','percentage')]}" />
+                                <div class="o_row" attrs="{'invisible': [('commission_type','!=','percentage')],'required':[('commission_type','=','percentage')]}">
+                                    <field name="commission_rate_percentage" attrs="{'required':[('commission_type','=','percentage')]}"/>
+                                    <span>%%</span>
+                                </div>
+                                <field name="sales_order_target" attrs="{'invisible': [('commission_type','!=','fixed')],'required':[('commission_type','=','fixed')]}"/>
+                                <field name="active" widget="boolean_toggle"/>
+                            </group>
+                            <group>
+                                <field name="sales_person_id" domain="[('is_salesperson','=',True)]"
+                                       widget="many2many_tags" required="1"
+                                       options='{"no_open": True, "no_create": True}'/>
+
+                            </group>
+
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!--        tree view-->
+
+        <record id="sale_commission_view_tree" model="ir.ui.view">
+            <field name="name">sale_commission_view_form</field>
+            <field name="model">sale.commission</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="sales_person_id" widget="many2many_tags"/>
+                    <field name="commission_type"/>
+                    <field name="commission_rate"/>
+                    <field name="sales_order_target" sum="Total"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- search view-->
+        <record id="sale_commission_search_view" model="ir.ui.view">
+            <field name="name">sale_commission_search_view</field>
+            <field name="model">sale.commission</field>
+            <field name="arch" type="xml">
+                <search string=" Sale Commission">
+                    <field name="name" string="Name"/>
+                    <filter string="Commission Type" name="commission_type" context="{'group_by':'commission_type'}"/>
+                    <filter string="SalesPerson" name="salesperson" context="{'group_by':'sales_person_id'}"/>
+                    <searchpanel>
+                        <!--                        <field name="sales_person_id" string="Sales Person" icon="fa-users" limit="20" select="multi"/>-->
+                        <field name="commission_type" string="Commission Type" icon="fa-star" enable_counters="1"/>
+                        <field name="commission_type_round" string="Commission Type Round" icon="fa-star"
+                               enable_counters="1"/>
+
+                    </searchpanel>
+
+                </search>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="sale_commission_view_action" model="ir.actions.act_window">
+            <field name="name">Sales Commission</field>
+            <field name="res_model">sale.commission</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    <h1>Ready to manage your Sales Commission more efficiently ?</h1>
+                </p>
+                <p>
+                    Let's create your first Sales Commission.
+                </p>
+            </field>
+        </record>
+        <!-- menuitem -->
+        <menuitem id="sale_commission_menuitem" name="Sales Commission" sequence="2" parent="sale.menu_sale_config"
+                  action="sale_commission_view_action"/>
+
+
+    </data>
+</odoo>

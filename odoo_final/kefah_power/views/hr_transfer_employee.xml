@@ -1,0 +1,176 @@
+<odoo>
+    <data>
+
+         <record model="ir.ui.view" id="transfer_employee_list">
+            <field name="name">transfer employee list</field>
+            <field name="model">transfer.employee</field>
+            <field name="arch" type="xml">
+                <tree string="Employee Transfer">
+                    <field name="project_id" />
+                    <field name="date" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="transfer_employee_form" model="ir.ui.view">
+            <field name="name">Employee Transfer</field>
+            <field name="model">transfer.employee</field>
+            <field name="arch" type="xml">
+                <form string="Employee Transfer">
+                    <header>
+                    <button name="action_confirm" string="Confirm" states="draft" type="object"  class="oe_highlight" />
+                    <button name="action_Done" string="Run" type="object" states="confirm" class="oe_highlight" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,done"/>
+                    </header>
+                    <sheet>
+                         <group>
+                            <field name="transfer_type" invisible='True'/>
+                        <group >
+                            <field name="project_id" required='True' options="{'no_create': True}" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                        <group>
+
+    <field name="project_id_to" options="{'no_create': True}" attrs="{'required':[('state','=','draft'),('transfer_type','!=','internal_transfer')],'readonly':[('state','!=','draft')],'invisible':[('transfer_type','!=','out_transfert')]}"/>
+
+                        </group>
+                        <group>
+                            <field name="user_id" readonly='True'/>
+                        </group>
+                        <group>
+                              <field name="date" readonly='True'/>
+                        </group>
+                        <group>
+                            <field name="company_id" readonly='True'/>
+
+                        </group>
+                        </group>
+                        <notebook>  
+                            <page string="Transfer Line">
+                                <button name="%(act_open_select_products_view)d" type="action" string="Select Employees"
+                                   context="{'default_transfer_id': active_id}" class="btn-primary mb-3" attrs="{'invisible': [('state','!=','draft')]}"/>
+                             <field name="transfer_ids">
+                                <tree editable="tree">
+                                    <field name="identification_no" readonly="True"/>
+                                    <field name="employee_id" readonly="True"/>
+                                    <field name="old_position_id" />
+                                    <field name="new_position_id"  domain="[('id','in',job_ids)]" attrs="{'readonly': [('parent.state','!=','draft')],'required': [('parent.transfer_type','!=','internal_transfer')]}" />
+                                    <field name="old_department_id" readonly="True"/>
+                                    <field name="new_department_id" domain="[('id','in',test_ids)]" force_save="True" attrs="{'readonly': [('parent.state','!=','draft')],'required': [('parent.transfer_type','!=','internal_transfer')]}"/>
+                                     <field name="test_ids" invisible="1"/>
+                                     <field name="job_ids" invisible="1"/>
+
+                                    <field name="old_eworking_hours" widget='monetary' 
+                                        options="{'currency_field': 'currency_id'}" readonly="True" invisible="True"/>
+                                    <field name="new_working_hours" widget='monetary' 
+                                        options="{'currency_field': 'currency_id'}" attrs="{'readonly': [('parent.state','!=','draft')]}" invisible="True"/>
+                                </tree>
+                             </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- bonus and year incremen  -->
+
+        <record id='kassco_hr_internal_transfer_action' model="ir.actions.act_window">
+            <field name="name">Internal Transfer</field>
+            <field name="res_model">transfer.employee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('transfer_type','=','internal_transfer')]</field>
+            <field name="context">{'default_transfer_type':'internal_transfer'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first Internal Transfer 
+                </p>
+            </field>
+        </record>
+
+          <record id='kascco_hr_out_transfer_action' model="ir.actions.act_window">
+            <field name="name">Out Transfer</field>
+            <field name="res_model">transfer.employee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('transfer_type','=','out_transfert')]</field>
+            <field name="context">{'default_transfer_type':'out_transfert'}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first Out Transfert 
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="transfert_employess_kassco" name="Internal &amp; Out Transfert" parent="project.menu_main_pm" sequence="4"/>
+
+         <menuitem id="menu_base_internal_transfer" name="Internal Transfer" parent ="transfert_employess_kassco"
+            action="kassco_hr_internal_transfer_action"  sequence="1"/> 
+
+        <menuitem id="menu_base_hr_out_transfer" name="Out Transfer" parent ="transfert_employess_kassco"
+            action="kascco_hr_out_transfer_action"  sequence="2"/>     
+
+        <record id="hr_transfer_details_form_view" model="ir.ui.view">
+            <field name="name">transfer details form</field>
+            <field name="model">transfer.details</field>
+            <field name="arch" type="xml">
+                <form string="Transfer Details ">
+                    <sheet>
+                        <group col='2' colspan='2'>
+                        <group >
+                            <field name='project_id' readonly="True"/>
+                            <field name='identification_no' readonly="True"/>
+                            <field name='department_id' readonly="True"/>
+                            <field name='hours_work' readonly="True"/>
+                      </group>
+                      <group >
+                            <field name='employee_id' readonly="True"/>
+                            <field name='job_id' readonly="True"/>
+                            <field name='state' readonly="True"/>
+                        </group>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View --> 
+        <record id="hr_transfer_details_tree_view" model="ir.ui.view">
+            <field name="name">Transfer Details Tree</field>
+            <field name="model">transfer.details</field>
+            <field name="arch" type="xml">
+                <tree string="Transfer Details">
+                  <field name='project_id'/>
+                  <field name="identification_no"/>
+                  <field name="employee_id"/>
+                  <field name='department_id'/>
+                  <field name='job_id'/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_transfer_details_search" model="ir.ui.view">
+            <field name="name">Transfer Details Search</field>
+            <field name="model">transfer.details</field>
+            <field name="arch" type="xml">
+                <search string="Project">
+                    <field name="project_id"/>
+                    <group string="Group By">
+                    <filter name="by_project" string="Project"
+                        context="{'group_by': 'project_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_transfer_details_action" model="ir.actions.act_window">
+            <field name="name">Transfer Details</field>
+            <field name="res_model">transfer.details</field>
+            <field name="context" eval="{'search_default_by_project': 1}"/>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="transfer_details_id" name="Employees Details" parent="transfert_employess_kassco" action="hr_transfer_details_action"
+         sequence="4"/>
+  
+    </data>
+</odoo>
+
+            

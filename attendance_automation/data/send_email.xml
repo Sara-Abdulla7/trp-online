@@ -1,0 +1,135 @@
+<odoo>
+	<data noupdate="0">
+		<record id="delay_employee_attendance" model="mail.template">
+			<field name="name">Delay Attendance</field>
+			<field name="model_id" ref="attendance_automation.model_hr_attendance"/>
+			<field name="subject">You Are Late !</field>
+			<field name="email_from">{object.env.user.email}</field>
+			<field name="email_to">{{ object.employee_id.work_email }}</field>
+			<field name="description">Sent automatically when someone are late</field>
+			<field name="body_html" type="html">
+<table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
+<table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate;">
+<tbody>
+	<tr>
+		<td align="center" style="min-width: 590px;">
+			<table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+				<tr><td valign="middle">
+					<span style="font-size: 10px;">Your Account</span><br/>
+					<span style="font-size: 20px; font-weight: bold;">
+						<t t-out="object.employee_id.name or ''">Marc Demo</t>
+					</span>
+				</td></tr>
+				<tr><td colspan="2" style="text-align:center;">
+				  <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+				</td></tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" style="min-width: 590px;">
+			<table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+				<tr><td valign="top" style="font-size: 13px;">
+					<div>
+						Dear <t t-out="object.employee_id.name or ''">Marc Demo</t>,<br/><br/>
+						Your attenandee is <t t-out="object.check_in"/> please do not delay next time <br/>
+						you are late  <t t-out="object.employee_id.delay_monthly_counter"/> times this month <br/>
+						Have a good day <!--  <t t-out=" object.id_expiry_date"/>  -->
+						
+
+						<t t-if="user.signature">
+							<br/>
+							<t t-out="user.signature or ''"><br/>Mitchell Admin</t>
+						</t>
+					</div>
+				</td></tr>
+				<tr><td style="text-align:center;">
+				  <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+				</td></tr>
+			</table>
+		</td>
+	</tr>
+</tbody>
+</table>
+</td></tr>
+<tr><td align="center" style="min-width: 590px;">
+	<table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+	  <tr><td style="text-align: center; font-size: 13px;">
+		Powered by <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth" style="color: #875A7B;">Odoo</a>
+	  </td></tr>
+	</table>
+</td></tr>
+</table>
+			</field>
+			<field name="lang">{{ object.employee_id.lang }}</field>
+			<field name="auto_delete" eval="True"/>
+		</record>
+
+		<record id="absent_employee_attendance" model="mail.template">
+			<field name="name">Absent Attendance</field>
+			<field name="model_id" ref="attendance_automation.model_hr_attendance"/>
+			<field name="subject">You Are Absent !</field>
+			<field name="email_from">{object.env.user.email}</field>
+			<field name="email_to">{{ object.employee_id.work_email }}</field>
+			<field name="description">Sent automatically when someone are absent</field>
+			<field name="body_html" type="html">
+<table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #FFFFFF; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
+<table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: #FFFFFF; color: #454748; border-collapse:separate;">
+<tbody>
+	<tr>
+		<td align="center" style="min-width: 590px;">
+			<table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+				<tr><td valign="middle">
+					<span style="font-size: 10px;">Your Account</span><br/>
+					<span style="font-size: 20px; font-weight: bold;">
+						<t t-out="object.employee_id.name or ''">Marc Demo</t>
+					</span>
+				</td></tr>
+				<tr><td colspan="2" style="text-align:center;">
+				  <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+				</td></tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" style="min-width: 590px;">
+			<table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+				<tr><td valign="top" style="font-size: 13px;">
+					<div>
+						Dear <t t-out="object.employee_id.name or ''">Marc Demo</t>,<br/><br/>
+						You are absent today please do not absent next time <br/>
+						you are absent  <t t-out="object.employee_id.absent_monthly_counter"/> times this month <br/>
+						Have a good day <!--  <t t-out=" object.id_expiry_date"/>  -->
+						
+
+						<t t-if="user.signature">
+							<br/>
+							<t t-out="user.signature or ''"><br/>Mitchell Admin</t>
+						</t>
+					</div>
+				</td></tr>
+				<tr><td style="text-align:center;">
+				  <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+				</td></tr>
+			</table>
+		</td>
+	</tr>
+</tbody>
+</table>
+</td></tr>
+<tr><td align="center" style="min-width: 590px;">
+	<table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+	  <tr><td style="text-align: center; font-size: 13px;">
+		Powered by <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth" style="color: #875A7B;">Odoo</a>
+	  </td></tr>
+	</table>
+</td></tr>
+</table>
+			</field>
+			<field name="lang">{{ object.employee_id.lang }}</field>
+			<field name="auto_delete" eval="True"/>
+		</record>
+
+	
+	</data>
+</odoo> 

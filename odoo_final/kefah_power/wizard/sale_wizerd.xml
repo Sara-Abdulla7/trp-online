@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_wizard_view_form" model="ir.ui.view">
+            <field name="name">sale.wizard.view.form</field>
+            <field name="model">sale.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <div>
+                    <h2>
+                      <field name="partner_id" placeholder="Project Name" required="1"/> 
+                    </h2> 
+                    </div>
+                    <group  colspan="4" col="4">
+                     <field name="company_id" invisible="True"/>
+                     <field name="subtotal" invisible="True"/>
+                     <field name="analytic_id" invisible="True"/>
+                    <field name="sale_order_id" force_save="True" invisible="True"/>
+                    </group>
+                    <div>
+                    <h3>
+                    <field name="warning" nolabel="1" attrs="{'invisible': [('is_customer_check','!=',True)]}"/>
+                    <field name="is_customer_check" invisible="True"/>
+                    </h3>
+                    </div>
+                    </sheet>
+                    <footer>
+                        <button name="create_project" type="object" string="Create"  class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="sale_report_wizard_action" model="ir.actions.act_window">
+            <field name="name">Creat Project</field>
+            <field name="res_model">sale.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+<!--         <record id="sale_report_wizard_action" model="ir.actions.act_window">
+            <field name="name">Creat Project</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="sale_wizard_view_form"/>
+            <field name="target">new</field>
+        </record> -->
+
+    </data>
+</odoo>

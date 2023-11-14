@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="web_partner_tree" model="ir.ui.view">
+        <field name="name">web.partner.tree</field>
+        <field name="model">web.partner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="web_partner_form" model="ir.ui.view">
+        <field name="name">web.partner.form</field>
+        <field name="model">web.partner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="image_1920" widget="image"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="web_partner_action" model="ir.actions.act_window">
+        <field name="name">Web Partner</field>
+        <field name="res_model">web.partner</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_web_partner"
+              name="Web Partner"
+              parent="contacts.res_partner_menu_config"
+              sequence="320"
+              action="web_partner_action"/>
+</odoo>

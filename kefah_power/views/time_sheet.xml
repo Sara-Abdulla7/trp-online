@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_time_sheet_details_keffah_tree" model="ir.ui.view">
+            <field name="name">time.sheet.details.keffah.tree</field>
+            <field name="model">time.sheet.details</field>
+            <field name="arch" type="xml">
+    <tree string="TimeSheet" decoration-success="state == 'draft'" decoration-info="state == 'confirm'"    decoration-warning="state == 'done'">
+                    <field name="project_id"/>
+                    <field name="data_request"/>
+                    <field name="split"/>
+                    <field name="time_sheet_type"/>
+                    <field name="ot_line_subtotal"/>
+                    <field name="salary_line_subtotal"/>
+                    <field name="ot_salary_subtotal"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_time_sheet_details_keffah_form" model="ir.ui.view" >
+            <field name="name">time.sheet.details.form</field>
+            <field name="model">time.sheet.details</field>
+            <field name="arch" type="xml">
+                <form string="TimeSheet">
+                    <header>
+                        <button name="submit_confirm" type="object" string="Confirm" class="btn-primary"
+                                attrs="{'invisible':[('state','in',('cancel','confirm','done'))]}"/>
+
+                        <button name="submit_done" type="object" string="Done" icon="fa-play-circle" class="btn-primary"
+                                attrs="{'invisible':[('state','in',('draft','cancel','done'))]}"/>
+                        <button name="reset_to_draft" type="object" string="Reset To Draft"  class="btn-primary"   
+                        attrs="{'invisible':[('state','in',('draft','cancel','done'))]}"/>
+                         <button name="submit_cancel" type="object" string="Cancel"  class="btn-danger"   
+                        attrs="{'invisible':[('state','in',('draft','cancel','done'))]}"/>
+                        <field name="state" widget="statusbar" status_bar="Draft,Confirmed,Done"/>
+                    </header>
+                    <sheet>
+                    <group>
+                        <group>
+                            <field name="project_id" attrs="{'required':[('state','=','draft')],'readonly':[('state','!=','draft')]}" options="{'no_create': True}"/>
+                            <field name="time_sheet_type" required="1"/>
+                            <field name="department_id" attrs="{'required':[('time_sheet_type','=','department')],'readonly':[('state','!=','draft')],'invisible':[('time_sheet_type','!=','department')]}" options="{'no_create': True}"/>
+                            <field name="name_arabic"  force_save="True" readonly="True" invisible="True"/>
+                             </group> 
+                             <group>
+                                <field name="data_request" readonly='True'/>
+                                <field name="split" attrs="{'required':[('state','=','draft')],'readonly':[('state','!=','draft')]}"/>
+                                <field name="standard" invisible="1"/>
+                                <field name="sale_order_project_id" readonly='True' force_save="True" invisible="True"/>
+                             </group>
+                         </group>
+
+                         <group string="TimeSheet Period">
+                            <group>
+                                <label for="timesheet_start_date" string="Timesheet Date"/>
+                                <div name="dates" class="o_row">
+                                    <field name="timesheet_start_date" widget="daterange" 
+                                    options='{"related_end_date": "timesheet_end_date"}' force_save="1"
+                                     attrs="{'required': [('state', '=', 'draft')],'readonly': [('state', '!=', 'draft')]}"/>
+                                    <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
+                                    <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow"/>
+                                    <field name="timesheet_end_date" widget="daterange" options='{"related_start_date": "timesheet_start_date"}' force_save="1"  attrs="{'required': [('state', '=', 'draft')],'readonly': [('state', '!=', 'draft')]}"/>
+                                </div>
+
+                                <field name="holiday_ids" widget="many2many_tags" options="{'no_create': True}" attrs="{'readonly':[('is_holiday','=','zero')]}" invisible="True"/>
+                                <field name="number_employees" force_save="True" readonly="True"/>
+                            </group>
+
+                            <group>
+                            <field name="holiday_total" force_save="True" />
+                              <field name="is_holiday" force_save="True" invisible="True"/>
+                             <div name="month" class="d-flex">
+                             <field name="month" force_save="True" readonly='True'/><span class="oe_inline o_form_label mx-3">Days</span>
+                            </div>
+                            </group>
+
+                        </group>
+                         <notebook>
+                            <page string="TimeSheetLine">
+                             <field name="timesheet_order_ids" attrs="{'required':[('state','=','draft')],'readonly':[('state','!=','draft')]}">
+                                    <tree editable="top" >
+                                        <field name="employee_id" readonly="True" options="{'no_create': True}"/>
+                                        <field name="identification_no" readonly="True" />
+                                        <field name="department_id" readonly="True" />
+                                        <field name="job_position_id" invisible="True"/> 
+                                        <field name="all_keffah_line_ids" options="{'no_create': True}" readonly="True"/>
+                                        <field name="normal_working_hours" sum="normal_working_hours"/>
+                                        <field name="working_hours_month" force_save="True" readonly="True" invisible="True"/>
+                                        <field name="working_hours_sheet" force_save="True" readonly="True"/>
+                                        <field name="working_hours" sum="working_hours" readonly="True"/>
+                                        <field name="ot_hours" readonly="True"/>
+                                        <field name="unit_price" force_save="True" invisible="True"/>
+                                        <field name="salary" sum="sum_total" options="{'currency_field': 'currency_id'}"/>
+                                        <field name="ot" invisible="True" attrs="{'required':[('parent.state','=','draft')],'readonly':[('parent.state','!=','draft')]}"  sum="ot"/>
+                                        <field name="ot_price" invisible="True" attrs="{'required':[('parent.state','=','draft')],'readonly':[('parent.state','!=','draft')]}" sum="ot_price" options="{'currency_field': 'currency_id'}"/>
+
+                                        <field name="ot_total" invisible="True" force_save="True" options="{'currency_field': 'currency_id'}"/>
+                                        <field name="ot_percent" invisible="True"/>
+                                        <field name="total" force_save="True" options="{'currency_field': 'currency_id'}" invisible="True"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string ="TimeSheet OT">
+                                <field name="timesheet_order_ot_ids">
+                                    <tree editable="top" >
+                                        <field name="job_position_id" options="{'no_create': True}" readonly="True"  />
+                                        <field name="all_keffah_line_ids" options="{'no_create': True}" invisible="True" />
+                                        <field name="ot" attrs="{'required':[('parent.state','=','draft')],'readonly':[('parent.state','!=','draft')]}" sum="ot"/>
+                                        <field name="ot_price" attrs="{'required':[('parent.state','=','draft')],'readonly':[('parent.state','!=','draft')]}" sum="ot_price" options="{'currency_field': 'currency_id'}"/>
+                                        <field name="ot_total" force_save="True" options="{'currency_field': 'currency_id'}"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="TimeSheet Attachments">
+                            <field name="attachment_ids" widget="many2many_binary" />
+                            </page>
+                         </notebook>
+
+                    <group name="note_group">
+                     <group class="oe_subtotal_footer oe_right"
+
+
+                               name="sale_total">
+                            <field name="ot_line_subtotal" widget='monetary'
+                                   options="{'currency_field': 'currency_id'}"/>
+                            <field name="salary_line_subtotal" widget='monetary'
+                                   options="{'currency_field': 'currency_id'}"/>
+                            <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                <label for="ot_salary_subtotal"/>
+
+                            </div>
+                            <field name="ot_salary_subtotal" nolabel="1"
+                                   class="oe_subtotal_footer_separator"
+                                   widget='monetary'
+                                   options="{'currency_field': 'currency_id'}"/>
+                        </group> 
+                    </group>
+                    </sheet>
+                      <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+                     </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="keffah_TimeSheet_keffah_action">
+            <field name="name">TimeSheet</field>
+            <field name="res_model">time.sheet.details</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first TimeSheet
+                </p>
+            </field>
+        </record>
+
+         <menuitem id="menu_keffah_TimeSheet"
+            parent="project.menu_main_pm"
+            sequence="3"
+            name="TimeSheet"
+            action="keffah_TimeSheet_keffah_action"/>
+
+
+
+
+        <record id="holiday_time_sheet_form_view" model="ir.ui.view">
+            <field name="name">holiday.time.sheet.view</field>
+            <field name="model">holiday.time.sheet</field>
+            <field name="arch" type="xml">
+                <form string="Holiday TimeSheet">
+                    <sheet>
+                            <group>
+                                <field name="name"/>
+                                <field name="holiday_id" readonly="True"/>
+                            </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        
+        <record id="holiday_time_sheet_tree_view" model="ir.ui.view">
+            <field name="name">holiday.time.sheet.tree.view</field>
+            <field name="model">holiday.time.sheet</field>
+            <field name="arch" type="xml">
+                <tree string="Holiday Time Sheet Tree">
+                    <field name="name"/>
+                    <field name="holiday_id"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="holiday_time_sheet_action" model="ir.actions.act_window">
+            <field name="name">Holiday time Sheet</field>
+            <field name="res_model">holiday.time.sheet</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                   Holiday Time Sheet
+                </p>
+            </field>
+        </record>
+
+        <!-- <menuitem id="attendance_settings_menu_item" name="Holiday TimeSheet" sequence="10" action="holiday_time_sheet_action" parent="project.menu_project_config"/> -->
+
+
+    </data>
+</odoo>
+
+ 

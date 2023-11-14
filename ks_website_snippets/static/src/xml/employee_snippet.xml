@@ -1,0 +1,55 @@
+<templates id="template" xml:space="preserve" name="customer">
+    <t t-name="ks_website_snippets.employee_of_the_month">
+        <style>
+            .cust_row {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+            .cust-col-md-2 {
+                padding: 10px;
+                box-sizing: border-box;
+                width: 20%;
+            }
+            .cust_card {
+                border: none;
+                overflow: hidden;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                transition: transform 0.3s ease-in-out;
+            }
+            .cust-card-body {
+                padding: 10px;
+            }
+            .cust-card-img-top {
+                border-radius: 50%;
+                object-fit: cover;
+                width: 180px;
+                height: 180px;
+            }
+            .cust_card:hover {
+                transform: scale(1.1);
+            }
+            .cust-card-title {
+                margin: 10px;
+                font-weight: 600;
+            }
+        </style>
+        <div class="container">
+            <div class="row cust_row">
+                <t t-foreach="res" t-as="employee">
+                    <div class="col-md-2 col-sm-12 cust-col-md-2">
+                        <div class="card cust_card">
+                            <div class="card-body cust-card-body">
+                                <img class="cust-card-img-top"
+                                    t-attf-src="data:image/png;base64,{{employee.img}}"/>
+                            </div>
+                            <h5 class="card-title cust-card-title"><t t-esc="employee.name"/></h5>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="sale_pdf_report" model="ir.actions.report">
+        <field name="name">Sale Quotation / Order record</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">dynamic_reports.sale_report</field>
+        <field name="report_file">dynamic_reports.sale_report</field>
+        <field name="print_report_name">object.name or ''</field>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="dynamic_reports.paper_format_custom_pdf_report"/>
+    </record>
+
+    <record id="purchase_pdf_report" model="ir.actions.report">
+        <field name="name">Purchase Quotation / Order Record</field>
+        <field name="model">purchase.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">dynamic_reports.purchase_report</field>
+        <field name="report_file">dynamic_reports.purchase_report</field>
+        <field name="print_report_name">object.name or 'Draft Invoice'</field>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="dynamic_reports.paper_format_custom_pdf_report"/>
+    </record>
+
+
+    <record id="invoice_pdf_report" model="ir.actions.report">
+        <field name="name">Invoice</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">dynamic_reports.invoice_report</field>
+        <field name="report_file">dynamic_reports.invoice_report</field>
+        <field name="print_report_name">object.name or ''</field>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="dynamic_reports.paper_format_custom_pdf_report"/>
+    </record>
+</odoo>

@@ -1,0 +1,32 @@
+<odoo>
+    <record id="arabic_product_form_view" model="ir.ui.view">
+        <field name="name">product.template.arabic_form_view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//sheet//h1//div[@class='d-flex']" position="after">
+                <div>
+                    <field name="arabic_name" placeholder="اسم المنتج بالعربي" style="margin-left:10px;"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+
+
+    <record id="arabic_product_template_kanban_view" model="ir.ui.view">
+        <field name="name">product.product_template_kanban_view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban//templates//t//div//div//div//div//strong//field[@name='name']" position="after">
+                <div>
+                    <field name="arabic_name" style="margin-left:0px;"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+ 
+</odoo>

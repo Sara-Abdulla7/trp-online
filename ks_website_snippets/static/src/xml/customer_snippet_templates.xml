@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="ks_website_snippets.dynamic_c1">
+        <t t-if="customer == 'No Data Found'">
+            <strong>No Data Found</strong>
+        </t>
+        <t t-else="">
+        <t t-set="count" t-value="Math.random().toString().substring(2)"/>
+        <div t-attf-id="o-carousel-product-{{count}}"
+             class="carousel slide position-sticky position_join  overflow-hidden container"
+             data-bs-ride="carousel"
+             data-bs-interval="2000"
+             t-att-data-name="product_carousel_block_name">
+            <div class="o_carousel_product_outer carousel-outer position-relative flex-grow-1">
+                <div class="carousel-inner h-100">
+                    <t t-foreach="customer" t-as="value">
+                        <div t-attf-class="carousel-item #{value.set_active ? 'active':''}">
+                            <div class="row" style="padding: 20px;">
+                                <t t-foreach="value" t-as="vals">
+                                    <div class="card col-md-3 cus_card">
+                                       <div class="card-body cus_card_body">
+                                           <div style="justify-content: center;margin-bottom: 50px;">
+                                               <img class="card-img-top cus_card_img"
+                                                    width="90" height="250"
+                                                    t-attf-src="data:image/png;base64,{{vals[2]}}" style="border-style: dotted !important;
+                                                                                border-color: rgb(52, 58, 64) !important;
+                                                                                border-width: 10px !important;
+                                                                                border-radius: 50% !important;
+                                                                                width: 280px;
+                                                                                height: 280px;
+                                                                                padding: 10px;"/>
+                                           </div>
+                                           <br/>
+                                           <div style="display: flex; justify-content: center;font-size: larger;font-weight: 900;font-family: initial;"><span class="names cus_name text-center" t-esc="vals[1]"> </span></div>
+                                        </div>
+                                      </div>
+                                    </t>
+                               </div>
+                            </div>
+                        </t>
+                    <a class="carousel-control-prev"
+                       t-attf-href="#o-carousel-product-{{count}}"
+                       role="button"
+                       data-bs-slide="prev">
+                        <span class="fa fa-chevron-left fa-2x oe_unmovable"
+                              role="img"
+                              aria-label="Previous"
+                              title="Previous"/>
+                    </a>
+                    <a class="carousel-control-next"
+                       t-attf-href="#o-carousel-product-{{count}}"
+                       role="button"
+                       data-bs-slide="next">
+                        <span class="fa fa-chevron-right fa-2x oe_unmovable"
+                              role="img"
+                              aria-label="Next"
+                              title="Next"/>
+                    </a>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center;padding-bottom: 40px;padding-top: 40px;"><a href="/customers/view?page=1"><button class="btn btn-primary">View more</button></a></div>
+        </div>
+        </t>
+    </t>
+    <t t-name="ks_website_snippets.dynamic_c2">
+        <t t-if="customer == 'No Data Found'">
+            <strong>No Data Found</strong>
+        </t>
+        <t t-else="">
+        <t t-set="count" t-value="Math.random().toString().substring(2)"/>
+         <div t-attf-id="o-carousel-product-{{count}}"
+             class="carousel slide position-sticky position_join  overflow-hidden container"
+             data-bs-ride="carousel"
+             data-bs-interval="2000"
+             t-att-data-name="product_carousel_block_name">
+            <div class="o_carousel_product_outer carousel-outer position-relative flex-grow-1">
+                <div class="carousel-inner h-100">
+                    <t t-foreach="customer" t-as="value">
+                        <div t-attf-class="carousel-item #{value.set_active ? 'active':''}">
+                            <div class="row" style="padding: 20px;">
+                                <t t-foreach="value" t-as="vals">
+                                    <div class="card col-md-3 cus_card">
+                                       <div class="card-body cus_card_body">
+                                           <div style="justify-content: center;margin-bottom: 50px;">
+                                               <img class="card-img-top cus_card_img"
+                                                    width="90" height="250"
+                                                     t-attf-src="data:image/png;base64,{{vals[2]}}" style="border-style: dotted !important;
+                                                                                border-color: rgb(52, 58, 64) !important;
+                                                                                border-width: 10px !important;
+                                                                                border-radius: 50% !important;
+                                                                                width: 280px;
+                                                                                height: 280px;
+                                                                                padding: 10px;"/>
+                                           </div>
+                                           <br/>
+                                           <div style="display: flex; justify-content: center;font-size: larger;font-weight: 900;font-family: initial;"><span class="names cus_name text-center" t-esc="vals[1]"> </span></div>
+                                        </div>
+                                      </div>
+                                    </t>
+                               </div>
+                            </div>
+                        </t>
+                    <a class="carousel-control-prev"
+                       t-attf-href="#o-carousel-product-{{count}}"
+                       role="button"
+                       data-bs-slide="prev">
+                        <span class="fa fa-chevron-left fa-2x oe_unmovable"
+                              role="img"
+                              aria-label="Previous"
+                              title="Previous"/>
+                    </a>
+                    <a class="carousel-control-next"
+                       t-attf-href="#o-carousel-product-{{count}}"
+                       role="button"
+                       data-bs-slide="next">
+                        <span class="fa fa-chevron-right fa-2x oe_unmovable"
+                              role="img"
+                              aria-label="Next"
+                              title="Next"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </t>
+    </t>
+    <t t-name="ks_website_snippets.dynamic_s1">
+        <t t-if="customer == 'No Data Found'">
+            <strong>No Data Found</strong>
+        </t>
+        <t t-else="">
+        <t t-set="count" t-value="Math.random().toString().substring(2)"/>
+        <div t-attf-id="o-carousel-product-{{count}}"
+             class="carousel slide position-sticky position_join  overflow-hidden container"
+             data-bs-ride="carousel"
+             data-bs-interval="2000"
+             t-att-data-name="product_carousel_block_name">
+            <div class="o_carousel_product_outer carousel-outer position-relative flex-grow-1">
+                <div class="carousel-inner h-100">
+                    <t t-foreach="customer" t-as="value">
+                        <div t-attf-class="carousel-item #{value.set_active ? 'active':''}">
+                            <div class="row" style="padding: 20px;">
+                                <t t-foreach="value" t-as="vals">
+                                    <div class="card col-md-3 cus_card">
+                                       <div class="card-body cus_card_body">
+                                           <div style="justify-content: center;margin-bottom: 50px;">
+                                               <img class="card-img-top cus_card_img"
+                                                    width="90" height="250"
+                                                     t-attf-src="data:image/png;base64,{{vals[2]}}" style="border-style: dotted !important;
+                                                                                border-color: rgb(52, 58, 64) !important;
+                                                                                border-width: 10px !important;
+                                                                                width: 280px;
+                                                                                height: 280px;
+                                                                                padding: 10px;"/>
+                                           </div>
+                                           <br/>
+                                           <div style="display: flex; justify-content: center;font-size: larger;font-weight: 900;font-family: initial;"><span class="names cus_name text-center" t-esc="vals[1]"> </span></div>
+                                        </div>
+                                      </div>
+                                    </t>
+                               </div>
+                            </div>
+                        </t>
+                    <a class="carousel-control-prev"
+                       t-attf-href="#o-carousel-product-{{count}}"
+                       role="button"
+                       data-bs-slide="prev">
+                        <span class="fa fa-chevron-left fa-2x oe_unmovable"
+                              role="img"
+                              aria-label="Previous"
+                              title="Previous"/>
+                    </a>
+                    <a class="carousel-control-next"
+                       t-attf-href="#o-carousel-product-{{count}}"
+                       role="button"
+                       data-bs-slide="next">
+                        <span class="fa fa-chevron-right fa-2x oe_unmovable"
+                              role="img"
+                              aria-label="Next"
+                              title="Next"/>
+                    </a>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center;padding-bottom: 40px;padding-top: 40px;"><a href="/customers/view?page=1"><button class="btn btn-primary">View more</button></a></div>
+        </div>
+        </t>
+    </t>
+    <t t-name="ks_website_snippets.dynamic_s2">
+        <t t-if="customer == 'No Data Found'">
+            <strong>No Data Found</strong>
+        </t>
+        <t t-else="">
+            <t t-set="count" t-value="Math.random().toString().substring(2)"/>
+             <div t-attf-id="o-carousel-product-{{count}}"
+                 class="carousel slide position-sticky position_join  overflow-hidden container"
+                 data-bs-ride="carousel"
+                 data-bs-interval="2000"
+                 t-att-data-name="product_carousel_block_name">
+                <div class="o_carousel_product_outer carousel-outer position-relative flex-grow-1">
+                    <div class="carousel-inner h-100">
+                        <t t-foreach="customer" t-as="value">
+                            <div t-attf-class="carousel-item #{value.set_active ? 'active':''}">
+                                <div class="row" style="padding: 20px;">
+                                    <t t-foreach="value" t-as="vals">
+                                        <div class="card col-md-3 cus_card">
+                                           <div class="card-body cus_card_body">
+                                               <div style="justify-content: center;margin-bottom: 50px;">
+                                                   <img class="card-img-top cus_card_img"
+                                                        width="90" height="250"
+                                                         t-attf-src="data:image/png;base64,{{vals[2]}}" style="border-style: dotted !important;
+                                                                                border-color: rgb(52, 58, 64) !important;
+                                                                                border-width: 10px !important;
+                                                                                width: 280px;
+                                                                                height: 280px;
+                                                                                padding: 10px;"/>
+                                               </div>
+                                               <br/>
+                                               <div style="display: flex; justify-content: center;font-size: larger;font-weight: 900;font-family: initial;"><span class="names cus_name text-center" t-esc="vals[1]"> </span></div>
+                                            </div>
+                                          </div>
+                                        </t>
+                                   </div>
+                                </div>
+                            </t>
+                        <a class="carousel-control-prev"
+                           t-attf-href="#o-carousel-product-{{count}}"
+                           role="button"
+                           data-bs-slide="prev">
+                            <span class="fa fa-chevron-left fa-2x oe_unmovable"
+                                  role="img"
+                                  aria-label="Previous"
+                                  title="Previous"/>
+                        </a>
+                        <a class="carousel-control-next"
+                           t-attf-href="#o-carousel-product-{{count}}"
+                           role="button"
+                           data-bs-slide="next">
+                            <span class="fa fa-chevron-right fa-2x oe_unmovable"
+                                  role="img"
+                                  aria-label="Next"
+                                  title="Next"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+</templates>

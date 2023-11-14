@@ -1,0 +1,132 @@
+<templates id="template" xml:space="preserve" name="customer">
+    <t t-name="ks_website_snippets.hierarchy_customer">
+        <t t-if="res['Error']">
+            <div style="display: flex;justify-content: center;">
+                <strong class="container" style="display: flex;
+                                                justify-content: center;
+                                                padding: 25px;
+                                                border: 2px solid;
+                                                margin-top: 2%;
+                                                color: red;"><t t-esc="res['Error']" /></strong>
+            </div>
+        </t>
+        <t t-else="">
+            <div class="tree" style="display: flex;justify-content: center;padding-bottom: 50px;">
+                <ul>
+                    <li>
+                        <a href="#" class="parent-link">
+                            <img class="card-img-top cus_card_img_h" width="90" height="250" t-attf-src="data:image/png;base64,{{res.values.img}}"/>
+                            <div>
+                                <span class="names cus_name text-center" t-esc="res.values.name" style="font-size: 15px;font-weight: 900;color: black;"/><br/>
+                                <span class="names cus_name text-center" t-esc="res.values.title" style="font-size: 10px;font-weight: 700;color: black;"/>
+                            </div>
+                        </a>
+                        <ul class="child-list">
+                            <t t-foreach="res.values.children" t-as="child">
+                                <li>
+                                    <a href="#" class="child-child">
+                                        <img class="card-img-top cus_card_img_h" width="90" height="250" t-attf-src="data:image/png;base64,{{child.img}}"/>
+                                        <div>
+                                            <span class="names cus_name text-center" t-esc="child.name" style="font-size: 15px;font-weight: 900;color: black;"/><br/>
+                                            <span class="names cus_name text-center" t-esc="child.title" style="font-size: 10px;font-weight: 700;color: black;"/>
+                                        </div>
+                                    </a>
+                                    <t t-if="child.children">
+                                        <ul class="child-list">
+                                             <t t-foreach="child.children" t-as="child">
+                                                  <li>
+                                                        <a href="#" class="child-child">
+                                                            <img class="card-img-top cus_card_img_h" width="90" height="250" t-attf-src="data:image/png;base64,{{child.img}}"/>
+                                                            <div>
+                                                                <span class="names cus_name text-center" t-esc="child.name" style="font-size: 15px;font-weight: 900;color: black;"/><br/>
+                                                                <span class="names cus_name text-center" t-esc="child.title" style="font-size: 10px;font-weight: 700;color: black;"/>
+                                                            </div>
+                                                        </a>
+                                                        <t t-if="child.children">
+                                                            <ul class="child-list" style="display: none;">
+                                                                 <t t-foreach="child.children" t-as="child">
+                                                                      <li>
+                                                                            <a href="#" class="child-child">
+                                                                                <img class="card-img-top cus_card_img_h" width="90" height="250" t-attf-src="/web/image/hr.employee.public/{{child.id}}/image_1920"/>
+                                                                                <div>
+                                                                                    <span class="names cus_name text-center" t-esc="child.name" style="font-size: 15px;font-weight: 900;color: black;"/><br/>
+                                                                                    <span class="names cus_name text-center" t-esc="child.title" style="font-size: 10px;font-weight: 700;color: black;"/>
+                                                                                </div>
+                                                                            </a>
+                                                                            <t t-if="child.children">
+                                                                            <ul class="child-list" style="display: none;">
+                                                                                 <t t-foreach="child.children" t-as="child">
+                                                                                      <li>
+                                                                                            <a href="#" class="child-child">
+                                                                                                <img class="card-img-top cus_card_img_h" width="90" height="250" t-attf-src="/web/image/hr.employee.public/{{child.id}}/image_1920"/>
+                                                                                                <div>
+                                                                                                    <span class="names cus_name text-center" t-esc="child.name" style="font-size: 15px;font-weight: 900;color: black;"/><br/>
+                                                                                                    <span class="names cus_name text-center" t-esc="child.title" style="font-size: 10px;font-weight: 700;color: black;"/>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                            <t t-if="child.children">
+                                                                                            <ul class="child-list" style="display: none;">
+                                                                                                 <t t-foreach="child.children" t-as="child">
+                                                                                                      <li>
+                                                                                                            <a href="#" class="child-child">
+                                                                                                                <img class="card-img-top cus_card_img_h" width="90" height="250" t-attf-src="/web/image/hr.employee.public/{{child.id}}/image_1920"/>
+                                                                                                                <div>
+                                                                                                                    <span class="names cus_name text-center" t-esc="child.name" style="font-size: 15px;font-weight: 900;color: black;"/><br/>
+                                                                                                                    <span class="names cus_name text-center" t-esc="child.title" style="font-size: 10px;font-weight: 700;color: black;"/>
+                                                                                                                </div>
+                                                                                                            </a>
+                                                                                                            <t t-if="child.children">
+                                                                                                                <ul class="child-list" style="display: none;">
+                                                                                                                     <t t-foreach="child.children" t-as="child">
+                                                                                                                          <li>
+                                                                                                                                <a href="#" class="child-child">
+                                                                                                                                    <img class="card-img-top cus_card_img_h" width="90" height="250" t-attf-src="/web/image/hr.employee.public/{{child.id}}/image_1920"/>
+                                                                                                                                    <div>
+                                                                                                                                        <span class="names cus_name text-center" t-esc="child.name" style="font-size: 15px;font-weight: 900;color: black;"/><br/>
+                                                                                                                                        <span class="names cus_name text-center" t-esc="child.title" style="font-size: 10px;font-weight: 700;color: black;"/>
+                                                                                                                                    </div>
+                                                                                                                                </a>
+                                                                                                                                <t t-if="child.children">
+                                                                                                                                <ul class="child-list" style="display: none;">
+                                                                                                                                     <t t-foreach="child.children" t-as="child">
+                                                                                                                                          <li>
+                                                                                                                                                <a href="#" class="child-child">
+                                                                                                                                                    <img class="card-img-top cus_card_img_h" width="90" height="250" t-attf-src="/web/image/hr.employee.public/{{child.id}}/image_1920"/>
+                                                                                                                                                    <div>
+                                                                                                                                                        <span class="names cus_name text-center" t-esc="child.name" style="font-size: 15px;font-weight: 900;color: black;"/><br/>
+                                                                                                                                                        <span class="names cus_name text-center" t-esc="child.title" style="font-size: 10px;font-weight: 700;color: black;"/>
+                                                                                                                                                    </div>
+                                                                                                                                                </a>
+                                                                                                                                          </li>
+                                                                                                                                     </t>
+                                                                                                                                </ul>
+                                                                                                                            </t>
+                                                                                                                          </li>
+                                                                                                                     </t>
+                                                                                                                </ul>
+                                                                                                            </t>
+                                                                                                      </li>
+                                                                                                 </t>
+                                                                                            </ul>
+                                                                                        </t>
+                                                                                      </li>
+                                                                                 </t>
+                                                                            </ul>
+                                                                        </t>
+                                                                      </li>
+                                                                 </t>
+                                                            </ul>
+                                                        </t>
+                                                  </li>
+                                             </t>
+                                        </ul>
+                                    </t>
+                                </li>
+                            </t>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </t>
+    </t>
+</templates>

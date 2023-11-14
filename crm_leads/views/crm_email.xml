@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="crm_email_view_tree" model="ir.ui.view">
+            <field name="name">crm_email_view_tree</field>
+            <field name="model">crm.email</field>
+            <field name="arch" type="xml">
+                <tree string="CRM Email" editable="bottom">
+                    <field name="employee_id" required="1"/>
+                    <field name="work_email" required="1"/>
+                    <field name="email_type" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="crm_email_view_action" model="ir.actions.act_window">
+            <field name="name">CRM Email</field>
+            <field name="res_model">crm.email</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    <h1>Add CRM Email For Salesperson</h1>
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem
+                id="menu_crm_email_salesperson_opportunity"
+                name="Emails Salesperson"
+                parent="crm.crm_menu_config"
+                sequence="1"
+                groups="sales_team.group_sale_manager"
+                action="crm_email_view_action"/>
+    </data>
+</odoo>

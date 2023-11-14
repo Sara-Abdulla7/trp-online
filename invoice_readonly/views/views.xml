@@ -1,0 +1,21 @@
+<odoo>
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_inherit_account_move_form_view" model="ir.ui.view">
+        <field name="name">view.inherit.account.move.form.view</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="check_label" attrs="{'invisible':['|',('state','!=','posted'),('payment_state','=','paid'),('move_type','!=','out_invoice')]}" />
+
+                <field name="id_invoice_lines" attrs="{'invisible':['|',('check_label','=',False),('move_type','!=','out_invoice')]}" />
+                <field name="label_name" attrs="{'invisible':['|',('check_label','=',False),('move_type','!=','out_invoice')]}" />
+            </xpath>
+            <xpath expr="//form//sheet//notebook//page[@name='invoice_tab']//field[@name='invoice_line_ids']//field[@name='name']" position="attributes">
+                <attribute name="attrs">{'readonly':[('parent.state','!=','draft')]}</attribute>      
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
+

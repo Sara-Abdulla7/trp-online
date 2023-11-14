@@ -1,0 +1,19 @@
+<odoo>
+
+<record id="crm_invis_form_inherit_view" model="ir.ui.view">
+    <field name="name">crm.invis.form</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id"
+           ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//button[@name='action_sale_quotations_new']" position="replace">
+                <button string="New Quotation" name="action_sale_quotations_new" type="object" class="oe_highlight" invisible="1"/>
+            </xpath>
+            <xpath expr="//form/sheet//div//button[@name='action_view_sale_quotation']" position="replace">
+                <button string="New Quotation" name="action_view_sale_quotation" type="object" class="oe_highlight" invisible="1"/>
+            </xpath>                
+
+        </field>
+    </record>
+
+</odoo>

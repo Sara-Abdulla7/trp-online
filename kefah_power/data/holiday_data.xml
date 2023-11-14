@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+        <record id="holiday_time_sheet_1" model="holiday.time.sheet">
+            <field name="name">Friday</field>
+            <field name="holiday_id">1</field>
+        </record>
+         <record id="holiday_time_sheet_2" model="holiday.time.sheet">
+            <field name="name">Saturday</field>
+            <field name="holiday_id">2</field>
+        </record>
+    </data>
+</odoo>

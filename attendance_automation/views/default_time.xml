@@ -1,0 +1,49 @@
+<odoo>
+	<data>
+
+
+
+        <record id="attendance_default_form_view" model="ir.ui.view">
+            <field name="name">attendance.default.form.view</field>
+            <field name="model">attendance.default</field>
+            <field name="arch" type="xml">
+                <form string="Attendance Settings">
+                    <sheet>
+                        <group>
+                            <field name="default_delay_time" widget="float_time"/>
+                            <field name="default_absent_time" widget="float_time"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        
+        <record id="attendance_default_tree_view" model="ir.ui.view">
+            <field name="name">attendance.default.tree.view</field>
+            <field name="model">attendance.default</field>
+            <field name="arch" type="xml">
+                <tree string="Attendance Settings tree">
+                    <field name="default_delay_time" widget="float_time"/>
+                    <field name="default_absent_time" widget="float_time"/>
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="attendance_default_action" model="ir.actions.act_window">
+            <field name="name">Attendance Action</field>
+            <field name="res_model">attendance.default</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No employees currently
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="attendance_default_settings_menu_item" name="Set Default Attendance Settings" sequence="20" action="attendance_default_action" parent="attendance_automation.attendance_settings_main_menu"/>
+
+    </data>
+</odoo>

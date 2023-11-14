@@ -1,0 +1,57 @@
+<odoo>
+	<data>
+        <record id="attendance_auto_form_view" model="ir.ui.view">
+            <field name="name">attendance.auto.form.view</field>
+            <field name="model">attendance.auto</field>
+            <field name="arch" type="xml">
+                <form string="Attendance who are late or absent">
+                    <sheet>
+                        <group>
+                            <field name="employee_id" />
+                            <field name="department_id" />
+                            <field name="check_in" invisible="True" />
+                            <field name="delay_check" invisible="True" />
+                            <field name="delay_time" widget="float_time"/>
+                            <field name="absent_check" invisible="True" />
+                            <field name="absent_time" widget="float_time"/>
+                            <field name="attend_type" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        
+        <record id="attendance_auto_tree_view" model="ir.ui.view">
+            <field name="name">attendance.auto.tree.view</field>
+            <field name="model">attendance.auto</field>
+            <field name="arch" type="xml">
+                <tree string="Attendance Settings tree">
+                    <field name="employee_id" />
+                    <field name="department_id" />
+                    <field name="check_in" invisible="True" />
+                    <field name="delay_check" invisible="True" />
+                    <field name="delay_time" widget="float_time"/>
+                    <field name="absent_check" invisible="True" />
+                    <field name="absent_time" widget="float_time"/>
+                    <field name="attend_type" />
+                </tree>
+            </field>
+        </record>
+
+
+
+        <record id="attendance_auto_action" model="ir.actions.act_window">
+            <field name="name">Attendance Action</field>
+            <field name="res_model">attendance.auto</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No employees currently
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="attendance_auto_settings_menu_item" name="Total Delay and Absent Employees" sequence="1" action="attendance_auto_action" parent="attendance_automation.attendance_settings_main_menu"/>
+    </data>
+</odoo>

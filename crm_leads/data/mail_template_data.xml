@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="mail_template_warning_day_for_leads" model="mail.template">
+            <field name="name">Warning Mail Day For Salesperson</field>
+            <field name="model_id" ref="crm_leads.model_crm_lead"/>
+            <field name="subject">Warning Mail For Day</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="active" eval="True"/>
+            <field name="lang">${user.lang}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <h1 class="text-warning" style="color:#ffcc00">
+                        Warning Mail For Day
+                    </h1>
+                    <h3>
+                        <b>Dear:</b>
+                        <span t-out="ctx.get('salesperson_name') or ''" style="font-weight: bold;"></span>
+                    </h3>
+                    <p>
+                        <div>
+                            You have not completed the opportunities required of you today <span
+                                t-out="ctx.get('day') or ''" style="font-weight: bold;"></span>.
+                        </div>
+                        <hr/>
+                        <div>
+                            Please replay by email
+                            regarding this
+                        </div>
+                        <hr/>
+                        <div>
+                            daily weaning schedule per total:
+                            <span t-out="ctx.get('leads_per_day') or 0" style="font-weight: bold;"></span>
+
+                        </div>
+                        <div>
+                            You have not completed all the opportunities required of you
+                            <span t-out="ctx.get('create_leads_per_day') or 0 " style="font-weight: bold;"></span>
+                            day.
+                            <div class="text-center" style="font-weight: bold;">You should contact
+                                your
+                                manager directly
+                            </div>
+                        </div>
+
+
+                    </p>
+
+                </div>
+
+            </field>
+        </record>
+        <record id="mail_template_warning_month_for_leads" model="mail.template">
+            <field name="name">Warning Mail Month For Salesperson</field>
+            <field name="model_id" ref="crm_leads.model_crm_lead"/>
+            <field name="subject">Warning Mail For Month</field>
+            <field name="auto_delete" eval="False"/>
+            <field name="active" eval="True"/>
+            <field name="lang">${user.lang}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <h1 class="text-warning" style="color:#ffcc00">
+                        Warning Mail For Month
+                    </h1>
+                    <h1 t-out="ctx.get('month') or ''" style="font-weight: bold;">
+
+                    </h1>
+                    <h3>
+                        <b>Dear:</b>
+                        <span t-out="ctx.get('salesperson_name') or ''" style="font-weight: bold;"></span>
+                    </h3>
+                    <p>
+                        <div>
+                            You have not completed the opportunities required of you today <span
+                                t-out="ctx.get('month') or ''" style="font-weight: bold;"></span>.
+                        </div>
+                        <hr/>
+                        <div>
+                            Please replay by email
+                            regarding this
+                        </div>
+                        <hr/>
+                        <div>
+                            daily weaning schedule per total:
+                            <span t-out="ctx.get('leads_per_month') or 0" style="font-weight: bold;"></span>
+
+                        </div>
+                        <div>
+                            You have not completed all the opportunities required of you
+                            <span t-out="ctx.get('create_leads_per_month') or 0 " style="font-weight: bold;"></span>
+                            day.
+                            <div class="text-center" style="font-weight: bold;">You should contact
+                                your
+                                manager directly
+                            </div>
+                        </div>
+
+
+                    </p>
+
+                </div>
+
+            </field>
+        </record>
+
+
+    </data>
+
+</odoo>

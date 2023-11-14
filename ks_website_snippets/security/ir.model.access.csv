@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_organizational_chart,access_hr_organizational_chart,model_hr_organizational_chart,base.group_user,1,0,0,0
+access_web_partner,access_web_partner,model_web_partner,base.group_user,1,1,1,1

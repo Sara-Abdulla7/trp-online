@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record id="view_attendance_tree_inherit" model="ir.ui.view">
+        <field name="name">hr.attendance.tree.inherit</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='employee_id']" position="after">
+                <field name='delay_time' widget="float_time"/>
+                <field name="delay_check" force_save="1" invisible="True" />
+                <field name= "absent_time" widget="float_time" />
+                <field name="absent_check"/>
+                <field name="default_id" invisible="1" />
+                <field name="is_check" invisible="1" />
+                <!-- <field name="attend_type"/> -->
+                <field name="absent_check" invisible="True" />
+                <field name="default_id" invisible="True" />
+                <field name="is_check" invisible="True" />            </xpath>
+            <xpath expr="//field[@name='worked_hours']" position="after">
+                <field name="attend_type"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_attendance_form_inherit" model="ir.ui.view">
+        <field name="name">hr.attendance.form.inherit</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='employee_id']" position="after">
+                <field name='delay_time'  widget="float_time" />
+                <field name="delay_check" force_save="1" invisible="True" />
+                <field name="attend_type"/>
+                <field name="is_check" invisible="1"/>
+                <field name="default_id" invisible="1"/>
+                <field name="is_check" invisible="True" />
+                <field name="default_id" invisible="True" />
+            </xpath>
+        </field>
+    </record>
+    </data>
+</odoo>
+
+

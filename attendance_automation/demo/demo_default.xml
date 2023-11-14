@@ -1,0 +1,6 @@
+<odoo>
+  <data>
+    <record id="1" model="attendance.default">
+    </record>
+  </data>
+</odoo>

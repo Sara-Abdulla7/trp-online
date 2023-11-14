@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="sale_commission_line_view_tree" model="ir.ui.view">
+            <field name="name">sale_commission_line_view_tree</field>
+            <field name="model">sale.commission.line</field>
+            <field name="arch" type="xml">
+                <tree string="sale commission line tree" class="text-center" create="0"
+                      decoration-success="state == 'success'"
+                      decoration-danger="state == 'failure'"
+                >
+                    <field name="name" />
+                    <field name="sale_commission_id" />
+                    <field name="create_date" string="Created on"/>
+                    <field name="target"/>
+                    <field name="commission_type"/>
+                    <field name="commission_rate" sum="Total"/>
+                    <field name="state" widget="badge"
+                           decoration-success="state == 'success'"
+                           decoration-danger="state == 'failure'" class="text-center"/>
+                    <field name="commission_done" widget="boolean_toggle" class="text-center" attrs="{'invisible':[('state','=','failure')]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sale_commission_line_search_view" model="ir.ui.view">
+            <field name="name">sale_commission_search_view</field>
+            <field name="model">sale.commission.line</field>
+            <field name="arch" type="xml">
+                <search string=" Sale Commission">
+                    <field name="name" string="Name"/>
+                    <filter string="Employee" name="employee" context="{'group_by':'name'}"/>
+                    <filter string="sale Commission" name="sale commission"
+                            context="{'group_by':'sale_commission_id'}"/>
+                    <filter string="State" name="state" context="{'group_by':'state'}"/>
+                    <filter string="Commission Type" name="commission_type" context="{'group_by':'commission_type'}"/>
+                    <filter string="Commission" name="commission_done" context="{'group_by':'commission_done'}"/>
+                    <filter string="Create Date" name="createdate" context="{'group_by':'create_date'}"/>
+                    <searchpanel>
+                        <field name="name" string="Employee" icon="fa-users" limit="20" select="multi"/>
+                        <field name="commission_type" string="Commission Type" icon="fa-star" enable_counters="1"/>
+                        <field name="commission_type_round" string="Commission Type Round" icon="fa-star"
+                               enable_counters="1"/>
+                        <field name="state" string="Commission State" icon="fa-star"
+                               enable_counters="1"/>
+
+                    </searchpanel>
+
+                </search>
+            </field>
+        </record>
+
+
+        <record id="sale_commission_line_view_action" model="ir.actions.act_window">
+            <field name="name">Sales Commission</field>
+            <field name="res_model">sale.commission.line</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    <h1>Ready to manage your Sales Commission more efficiently ?</h1>
+                </p>
+                <p>
+                    Let's create your first Sales Commission.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="sale_commission_line_menuitem" name="Sales Commission Employee" sequence="3"
+                  parent="sale.menu_sale_config"
+                  action="sale_commission_line_view_action"/>
+
+
+    </data>
+</odoo>

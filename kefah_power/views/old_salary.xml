@@ -1,0 +1,86 @@
+<odoo>
+	<data>
+
+		<record id="old_salary_form_view" model="ir.ui.view">
+			<field name="name">Old Salary Form</field>
+			<field name="model">old.salary</field>
+			<field name="arch" type="xml">
+				<form string="Old Salary ">
+					<sheet>
+						<field name="employee_id"/>
+			
+						<group>
+							<group>
+								<field name="project_id"/>
+							</group>
+							<group>	
+								<field name="project_id_to"/>
+							</group>
+						</group>
+
+						<group>
+							<group>
+								<field name="transfer_date"/>
+								<field name="old_working_hours"/>
+								<field name="salary"/>
+							</group>
+							<group>
+								<field name="active" widget="boolean_toggle"/>
+								<field name="old_department_id"/>
+							</group>
+						</group>
+
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+			
+		<record id="old_salary_tree_view" model="ir.ui.view">
+			<field name="name">old.salary.tree</field>
+			<field name="model">old.salary</field>
+			<field name="arch" type="xml">
+				<tree string="employee transfer details ">
+					<field name="employee_id"/>
+					<field name="project_id"/>
+					<field name="project_id_to"/>
+				</tree>
+			</field>
+		</record>
+
+	    <record id="old_salary_action" model="ir.actions.act_window">
+	    	<field name="name">Old Salary</field>
+	    	<field name="res_model">old.salary</field>
+	    	<field name="view_mode">tree,form</field>
+	    </record>
+	    <menuitem id="old_salary_menuitem" name="Old Salary" parent="transfert_employess_kassco" action="old_salary_action" sequence="5"/>
+<!-- 
+			<field name="employee_id"/>
+			
+			<group>
+				<field name="project_id"/>
+				<field name="project_id_to"/>
+			</group>
+
+			<group>
+				<field name="old_project_date"/>
+				<field name="transfer_date"/>
+			</group>
+
+			<group>
+				<field name="old_department_id"/>
+				<field name="new_department_id"/>
+			</group>
+
+			<group>
+				<field name="old_working_hours"/>
+				<field name="salary"/>
+			</group>
+
+			<group>			
+				<field name="active" widget="boolean_toggle"/>
+			</group>
+ -->
+	</data>
+</odoo>

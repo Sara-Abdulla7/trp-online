@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="kefah_layout_header">
+            <div t-attf-class="header o_company_#{company.id}_layout" style="report_header_style">
+                <div class="row">
+                    <div class="col-3 mb4">
+                        <t t-if="company.company_type == 'keffah'">
+                        <img class="img" src="/dynamic_reports/static/img/kascco_header.png" />
+                        </t>
+                         <t t-if="company.company_type == 'keffah_1'">
+                        <img class="img" src="/dynamic_reports/static/img/kascco_header.png" />
+                        </t>
+                         <t t-if="company.company_type == 'keffah_3'">
+                        <img class="img" src="/dynamic_reports/static/img/kascco_header.png" />
+                        </t>
+                        <t t-elif="company.company_type == 'keffah_solutions'">
+                        <img class="img" src="/dynamic_reports/static/img/solutions_header.jpg" />
+                        </t>
+                    </div>
+                    <div t-if="company.watermark and company.watermark_option == 'backgroundimage'" style="opacity: 0.50;">
+                        <img t-if="company.attachment"
+                             t-att-src="image_data_uri(company.attachment)"
+                             style="top:400px;position:fixed;width:100%; opacity: 0.80;height:auto;"/>
+                    </div>
+                    <div t-if="company.watermark_option == 'logo'" style="opacity: 0.50;">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                             style="top:400px;width:100%; opacity: 0.50;height:auto;"/>
+                    </div>
+<!--                    <t t-if="'x_approver_ids' in o._fields and o.x_approver_ids">-->
+<!--                        <t t-if="o.x_fully_approved == True">-->
+<!--                            <div t-if="company.watermark_option == 'watermark'">-->
+<!--                                <t t-if="company.attachment_alignment == True and not company.font_size and not company.font_color">-->
+<!--                                    <span t-field="company.watermark_text"-->
+<!--                                          t-att-style="'transform:rotate(' + company.alignment_angle + ' deg); -webkit-transform:rotate(' + company.alignment_angle + 'deg); top:400px;position:fixed;text-align:center;width:100%;absolute;opacity:0.25; z-index:99;'"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="company.attachment_alignment == True and company.font_size and not company.font_color">-->
+<!--                                    <span t-field="company.watermark_text"-->
+<!--                                          t-att-style="'transform:rotate(' + company.alignment_angle + ' deg); -webkit-transform:rotate(' + company.alignment_angle + 'deg);font-size:'+ company.font_size + 'px;top:500px;position:fixed;text-align:center;width:100%;absolute;opacity:0.25; z-index:99;'"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="company.attachment_alignment == True and company.font_color and not company.font_size">-->
+<!--                                    <span t-field="company.watermark_text"-->
+<!--                                          t-att-style="'transform:rotate(' + company.alignment_angle + ' deg); -webkit-transform:rotate(' + company.alignment_angle + 'deg);color: '+ company.font_color +'; top:400px;position:fixed;text-align:center;width:100%;absolute;opacity:0.25; z-index:99;'"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="company.attachment_alignment == True and company.font_size and company.font_color">-->
+<!--                                    <span t-field="company.watermark_text"-->
+<!--                                          t-att-style="'transform:rotate(' + company.alignment_angle + ' deg); -webkit-transform:rotate(' + company.alignment_angle + 'deg);font-size: '+ company.font_size + 'px; color: '+ company.font_color +';top:400px;position:fixed;text-align:center;width:100%;absolute;opacity:0.25; z-index:99;'"/>-->
+<!--                                </t>-->
+<!--                                <t t-if="company.attachment_alignment == False">-->
+<!--                                    <t t-if="company.font_size and not company.font_color">-->
+<!--                                        <span t-field="company.watermark_text"-->
+<!--                                              t-att-style="'font-size:' + company.font_size + 'px;''top:400px;position:fixed;text-align:center;width:100%;absolute;opacity:0.25; z-index:99;'"/>-->
+<!--                                    </t>-->
+<!--                                    <t t-if="company.font_color and not company.font_size">-->
+<!--                                        <span t-field="company.watermark_text"-->
+<!--                                              t-att-style="'color:' + company.font_color + ';' 'top:400px;position:fixed;text-align:center;width:100%;absolute;opacity:0.25; z-index:99;'"/>-->
+<!--                                    </t>-->
+<!--                                    <t t-if="company.font_size and company.font_color">-->
+<!--                                        <span t-field="company.watermark_text"-->
+<!--                                              t-att-style="'font-size:' + company.font_size + 'px;' 'color:' + company.font_color + ';' 'top:400px;position:fixed;text-align:center;width:100%;absolute;opacity:0.25; z-index:99;'"/>-->
+<!--                                    </t>-->
+<!--                                </t>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                    </t>-->
+                </div>
+            </div>
+
+
+            <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}"
+                 t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});"
+                 t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                 t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <div class="pt-5">
+                    <!-- This div ensures that the address is not cropped by the header. -->
+                    <t t-call="web.address_layout"/>
+                </div>
+                <t t-out="0"/>
+            </div>
+
+            <div t-attf-class="footer">
+                <div class="text-center">
+                    <img t-if="o.company_id.stamp" t-att-src="image_data_uri(o.company_id.stamp)"
+                         style="height:150px;float:left;"/>
+                    <img t-if="o.qr_code" t-attf-src="data:image/*;base64,{{o.qr_code}}"
+                         style="width:150px; height:150px;float: right;"/>
+
+                        <t t-if="company.company_type == 'keffah'">
+                        <img class="img" src="/dynamic_reports/static/img/kascco_footer.png" />
+                        </t>
+                         <t t-if="company.company_type == 'keffah_1'">
+                        <img class="img" src="/dynamic_reports/static/img/kascco_footer.png" />
+                        </t>
+                         <t t-if="company.company_type == 'keffah_3'">
+                        <img class="img" src="/dynamic_reports/static/img/kascco_footer.png" />
+                        </t>
+                        <t t-elif="company.company_type == 'keffah_solutions'">
+                        <img class="img" src="/dynamic_reports/static/img/solutions_footer.jpeg" />
+                        </t>
+
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page:
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+
+        <template id="kefah_layout">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+
+            <t t-call="dynamic_reports.kefah_layout_header">
+                <t t-out="0"/>
+            </t>
+        </template>
+
+    </data>
+</odoo>

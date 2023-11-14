@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="res_users_form_add_salesperson" model="ir.ui.view">
+            <field name="name">res_users_form_add_salesperson</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='login']" position="after">
+                    <!-- Add your fields or attributes here -->
+                    <label for="is_salesperson" string="Is Salesperson"/>
+                    <field name="is_salesperson" widget="boolean_toggle"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

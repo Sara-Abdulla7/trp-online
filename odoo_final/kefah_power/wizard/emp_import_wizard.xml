@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="emp_import_wizard" model="ir.ui.view">
+        <field name="name">emp.import.wizard</field>
+        <field name="model">emp.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Employees">
+                <div class="alert alert-info" role="alert">
+                    <span class="o_form_label">Please Import XLS.</span>
+                </div>
+                <group>
+                    <label for="file_name"/>
+                    <field name="data_file" nolabel="1" filename="file_name" />
+                    <field name="file_name" invisible="1" />
+                </group>
+                <footer>
+                    <button name="action_import" string="Import" type="object"
+                            class="oe_highlight"/>
+                    <button string="Close" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_emp_import_wizard" model="ir.actions.act_window">
+        <field name="name">Import Employees Line</field>
+        <field name="res_model">emp.import.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

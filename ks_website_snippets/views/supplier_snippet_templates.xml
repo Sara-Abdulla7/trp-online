@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_supplier_snippets" name="Vendor Snippet">
+        <section class="s_special_supplier_options">
+            <div class="container">
+                <t t-call="ks_website_snippets.supplier_dynamic_c1"/>
+            </div>
+        </section>
+    </template>
+
+    <template id="supplier_dynamic_c1"
+              name="supplier snippet" groups="base.group_user">
+        <div class="supplier-page container" style="height: 100px;">
+            <strong>Choose Filter</strong>
+        </div>
+    </template>
+    <template id="supplier_dynamic_c2"
+              name="supplier snippet" groups="base.group_user">
+        <div class="supplier-page2 container" style="height: 100px;">
+            <strong>Choose Filter</strong>
+        </div>
+    </template>
+    <template id="supplier_dynamic_s1"
+              name="supplier snippet" groups="base.group_user">
+        <div class="supplier-page container" style="height: 100px;">
+            <strong>Choose Filter</strong>
+        </div>
+    </template>
+    <template id="supplier_dynamic_s2"
+              name="supplier snippet" groups="base.group_user">
+        <div class="supplier-page2 container" style="height: 100px;">
+            <strong>Choose Filter</strong>
+        </div>
+    </template>
+
+    <template id="s_special_supplier_options"
+              inherit_id="website.snippet_options">
+        <xpath expr="." position="inside">
+            <div data-js="SpecialSupplier"
+                 data-selector=".s_special_supplier_options">
+                <we-select string="Filter"
+                           data-name="ks_website_snippets_supplier"
+                           data-attribute-name="SpecialSupplierTemplate"
+                           data-attribute-default-value="default">
+                    <we-button title="Default"
+                               data-select-template="ks_website_snippets.supplier_dynamic_c1"
+                               data-select-data-attribute="default"
+
+                    >Vendors[circle]</we-button>
+                    <we-button title="temp3"
+                               data-select-template="ks_website_snippets.supplier_dynamic_s1"
+                               data-select-data-attribute="temp3"
+                    >Vendors[square]</we-button>
+                    <we-button title="temp2"
+                               data-select-template="ks_website_snippets.supplier_dynamic_c2"
+                               data-select-data-attribute="Temp2"
+                    >Is Supplier[circle]</we-button>
+                    <we-button title="temp4"
+                               data-select-template="ks_website_snippets.supplier_dynamic_s2"
+                               data-select-data-attribute="Temp4"
+                    >Is Supplier[square]</we-button>
+                </we-select>
+            </div>
+        </xpath>
+    </template>
+</odoo>

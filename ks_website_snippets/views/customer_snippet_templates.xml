@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_special_snippets" name="Customer Snippet">
+        <section class="s_special_products_options">
+            <div class="container">
+                <t t-call="ks_website_snippets.dynamic_c1"/>
+            </div>
+        </section>
+    </template>
+
+    <template id="employee_of_the_month_snippets" name="Best Employees">
+        <section class="employee_of_the_month">
+            <div class="employee_month container" style="display: flex;
+                                                        justify-content: center;
+                                                        font-weight: 900;
+                                                        font-style: italic;">
+                <h1>EMPLOYEES</h1>
+            </div>
+        </section>
+    </template>
+
+    <template id="hierarchy_special_snippets" name="Customer Hierarchy">
+        <section class="hierarchy_special_products_options">
+            <div class="hierarchy_special_customers">
+            </div>
+        </section>
+    </template>
+
+     <template id="partners_special_snippets" name="Partner Snippet">
+        <section class="special_partner_snippet_s">
+            <div class="container">
+                <t t-call="ks_website_snippets.partner_snippet_tmp"/>
+            </div>
+        </section>
+    </template>
+
+      <template id="all_customers" name="All Customers">
+           <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <t t-foreach="customers" t-as="customer">
+                        <div class="col-md-3">
+                            <div class="card mb-3" style="border: none;">
+                                <div class="card-body">
+                                     <img class="card-img-top cus_card_img"
+                                                        width="90" height="250"
+                                                        t-attf-src="/web/image/res.partner/{{customer.id}}/image_1920"/>
+                                </div>
+                                <h5 class="card-title text-center" style="margin: 10px;font-weight: 600;"><t t-esc="customer.name"/></h5>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <div class="pagination" style="display: flex;justify-content: flex-end;">
+                    <t t-if="hasPrev">
+                        <a class="btn btn-primary" t-attf-href="/customers/view?page={{ page - 1 }}" style="margin: 10px;"><i class="fa fa-solid fa-arrow-left"/></a>
+                    </t>
+                    <div style="font-weight: 900;
+                                margin: 6px;
+                                color: black;
+                                padding: 4px;
+                                font-size: 25px;"><t t-esc="page"/> </div>
+                    <t t-if="hasNext">
+                        <a class="btn btn-primary" t-attf-href="/customers/view?page={{ page + 1 }}" style="margin: 10px;"><i class="fa fa-solid fa-arrow-right"/></a>
+                    </t>
+                </div>
+            </div>
+           </t>
+        </template>
+
+    <template id="all_vendors" name="All Vendors">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <t t-foreach="customers" t-as="customer">
+                        <div class="col-md-3">
+                            <div class="card mb-3" style="border: none;">
+                                <div class="card-body">
+                                     <img class="card-img-top cus_card_img"
+                                                        width="90" height="250"
+                                                        t-attf-src="/web/image/res.partner/{{customer.id}}/image_1920"/>
+                                </div>
+                                <h5 class="card-title text-center" style="margin: 10px;font-weight: 600;"><t t-esc="customer.name"/></h5>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <div class="pagination" style="display: flex;justify-content: flex-end;">
+                    <t t-if="hasPrev">
+                        <a class="btn btn-primary" t-attf-href="/customers/view?page={{ page - 1 }}" style="margin: 10px;"><i class="fa fa-solid fa-arrow-left"/></a>
+                    </t>
+                    <div style="font-weight: 900;
+                                margin: 6px;
+                                color: black;
+                                padding: 4px;
+                                font-size: 25px;"><t t-esc="page"/> </div>
+                    <t t-if="hasNext">
+                        <a class="btn btn-primary" t-attf-href="/customers/view?page={{ page + 1 }}" style="margin: 10px;"><i class="fa fa-solid fa-arrow-right"/></a>
+                    </t>
+                </div>
+            </div>
+           </t>
+    </template>
+
+    <template id="partner_snippet_tmp" name="partner snippet" groups="base.group_user">
+        <div/>
+    </template>
+
+    <template id="dynamic_c1"
+              name="special snippet" groups="base.group_user">
+        <div class="product-page container" style="height: 100px;">
+            <strong>Choose Filter</strong>
+        </div>
+    </template>
+    <template id="dynamic_c2"
+              name="special snippet" groups="base.group_user">
+        <div class="product-page2 container" style="height: 100px;">
+            <strong>Choose Filter</strong>
+        </div>
+    </template>
+    <template id="dynamic_s1"
+              name="special snippet" groups="base.group_user">
+        <div class="product-page container" style="height: 100px;">
+            <strong>Choose Filter</strong>
+        </div>
+    </template>
+    <template id="dynamic_s2"
+              name="special snippet" groups="base.group_user">
+        <div class="product-page2 container" style="height: 100px;">
+            <strong>Choose Filter</strong>
+        </div>
+    </template>
+
+    <template id="s_special_products_options"
+              inherit_id="website.snippet_options">
+        <xpath expr="." position="inside">
+            <div data-js="SpecialProduct"
+                 data-selector=".s_special_products_options">
+                <we-select string="Filter"
+                           data-name="ks_website_snippets"
+                           data-attribute-name="SpecialProductTemplate"
+                           data-attribute-default-value="default">
+                    <we-button title="Default"
+                               data-select-template="ks_website_snippets.dynamic_c1"
+                               data-select-data-attribute="default"
+                    >Customer[circle]</we-button>
+                    <we-button title="temp2"
+                               data-select-template="ks_website_snippets.dynamic_s1"
+                               data-select-data-attribute="temp2"
+                    >Customer[square]</we-button>
+                    <we-button title="temp3"
+                               data-select-template="ks_website_snippets.dynamic_c2"
+                               data-select-data-attribute="Temp3"
+                    >Web Customer[circle]</we-button>
+                    <we-button title="temp4"
+                               data-select-template="ks_website_snippets.dynamic_s2"
+                               data-select-data-attribute="Temp4"
+                    >Web Customer[square]</we-button>
+                </we-select>
+            </div>
+            <div data-js="SpecialPartner"
+                 data-selector=".special_partner_snippet_s">
+            </div>
+        </xpath>
+    </template>
+</odoo>

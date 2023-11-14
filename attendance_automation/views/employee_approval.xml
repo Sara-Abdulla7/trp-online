@@ -1,0 +1,17 @@
+<odoo>
+	<data>
+    	<record id="view_attendance_employee_form_inherit" model="ir.ui.view">
+        	<field name="name">hr.attendance.employee.form.inherit</field>
+	        <field name="model">hr.employee</field>
+	        <field name="inherit_id" ref="hr.view_employee_form"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="//group[@name='identification_group']//div[@class='o_row']" position="after">
+	               <field name="type_of_employee"/>
+	               <field name="attendance_approval"/>
+	               <field name="delay_monthly_counter"/>
+	               <field name="absent_monthly_counter"/>
+	            </xpath>
+	        </field>
+	    </record>
+    </data>
+</odoo>

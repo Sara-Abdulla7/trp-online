@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_employees_performance_individual_report_pdf"
+            model="ir.actions.report">
+        <field name="name">Employee reports</field>
+        <field name="model">hr.attendance</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ks_website_snippets.report_employee_ind</field>
+        <field name="report_file">ks_website_snippets.report_employee_ind</field>
+        <field name="print_report_name">'Employees Performance Report - %s' %
+            (object.name)
+        </field>
+    </record>
+
+    <template id="report_employee_ind">
+        <t t-call="web.external_layout">
+            <t t-call="web.html_container">
+                <div class="page text-center" style="margin-bottom: 20px;">
+                    <strong>Employee Performance
+                    </strong>
+                </div>
+                <div>
+                    <table class="table table-sm o_main_table">
+                        <tr>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Employee
+                            </td>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Attendance
+                            </td>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Task
+                            </td>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Performance
+                            </td>
+                        </tr>
+                        <t t-foreach="vals" t-as="employee">
+                            <tr>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-esc="employee['name']"/>
+                                </td>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-set="width"
+                                       t-value="str(employee['attendance']) + 'px'"/>
+                                    <div style="display: flex;">
+                                        <div style="width: 100px; height: 20px; border: 0px solid;background-color: lightgrey;overflow: hidden;">
+                                            <div t-attf-style="width: {{width}}; height: 20px; background-color: #4CAF50;"/>
+                                        </div>
+                                        <strong>
+                                            <t t-esc="str(employee['rounded_a']) + '%'"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-set="width"
+                                       t-value="str(employee['task']) + 'px'"/>
+                                    <div style="display: flex;">
+                                        <div style="width: 100px; height: 20px; border: 0px solid;background-color: lightgrey;overflow: hidden;">
+                                            <div t-attf-style="width: {{width}}; height: 20px; background-color: #4CAF50;"/>
+                                        </div>
+                                        <strong>
+                                            <t t-esc="str(employee['rounded_t']) + '%'"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-set="width"
+                                       t-value="str(employee['Performance']) + 'px'"/>
+                                    <div style="display: flex;">
+                                        <div style="width: 100px; height: 20px; border: 0px solid;background-color: lightgrey;overflow: hidden;">
+                                            <div t-attf-style="width: {{width}}; height: 20px; background-color: #4CAF50;"/>
+                                        </div>
+                                        <strong>
+                                            <t t-esc="str(employee['rounded']) + '%'"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_employees_performance_report_pdf"
+            model="ir.actions.report">
+        <field name="name">Employees reports</field>
+        <field name="model">hr.attendance</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ks_website_snippets.report_employees</field>
+        <field name="report_file">ks_website_snippets.report_employees</field>
+        <field name="print_report_name">'Employees Performance Report - %s' %
+            (object.name)
+        </field>
+    </record>
+
+    <template id="report_employees">
+        <t t-call="web.external_layout">
+            <t t-call="web.html_container">
+                <div class="page text-center" style="margin-bottom: 20px;">
+                    <strong>Employees Performance
+                        Report
+                    </strong>
+                </div>
+                <div>
+                    <table class="table table-sm o_main_table">
+                        <tr>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Employee
+                            </td>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Attendance
+                            </td>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Task
+                            </td>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Performance
+                            </td>
+                        </tr>
+                        <t t-foreach="vals" t-as="employee">
+                            <tr>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-esc="employee['name']"/>
+                                </td>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-set="width"
+                                       t-value="str(employee['attendance']) + 'px'"/>
+                                    <div style="display: flex;">
+                                        <div style="width: 100px; height: 20px; border: 0px solid;background-color: lightgrey;overflow: hidden;">
+                                            <div t-attf-style="width: {{width}}; height: 20px; background-color: #4CAF50;"/>
+                                        </div>
+                                        <strong>
+                                            <t t-esc="str(employee['rounded_a']) + '%'"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-set="width"
+                                       t-value="str(employee['task']) + 'px'"/>
+                                    <div style="display: flex;">
+                                        <div style="width: 100px; height: 20px; border: 0px solid;background-color: lightgrey;overflow: hidden;">
+                                            <div t-attf-style="width: {{width}}; height: 20px; background-color: #4CAF50;"/>
+                                        </div>
+                                        <strong>
+                                            <t t-esc="str(employee['rounded_t']) + '%'"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-set="width"
+                                       t-value="str(employee['Performance']) + 'px'"/>
+                                    <div style="display: flex;">
+                                        <div style="width: 100px; height: 20px; border: 0px solid;background-color: lightgrey;overflow: hidden;">
+                                            <div t-attf-style="width: {{width}}; height: 20px; background-color: #4CAF50;"/>
+                                        </div>
+                                        <strong>
+                                            <t t-esc="str(employee['rounded']) + '%'"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+    <record id="action_employees_individual_performance_report_pdf"
+            model="ir.actions.report">
+        <field name="name">Individual Performance</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ks_website_snippets.report_employee</field>
+        <field name="report_file">ks_website_snippets.report_employee</field>
+        <field name="print_report_name">'Employee Performance Report - %s' %(object.name)</field>
+        <field name="binding_type">report</field>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+    </record>
+    <template id="report_employee">
+        <t t-call="web.external_layout">
+            <t t-call="web.html_container">
+                <div class="page text-center" style="margin-bottom: 20px;">
+                    <strong>
+                        Employee Performance
+                    </strong>
+                </div>
+                <div>
+                    <table class="table table-sm o_main_table">
+                        <tr>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Employee
+                            </td>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Attendance
+                            </td>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Task
+                            </td>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Performance
+                            </td>
+                        </tr>
+                        <t t-set="vals" t-value="docs.get_performance()"/>
+                        <t t-foreach="vals" t-as="employee">
+                            <tr>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-esc="employee['name']"/>
+                                </td>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-set="width"
+                                       t-value="str(employee['attendance']) + 'px'"/>
+                                    <div style="display: flex;">
+                                        <div style="width: 100px; height: 20px; border: 0px solid;background-color: lightgrey;overflow: hidden;">
+                                            <div t-attf-style="width: {{width}}; height: 20px; background-color: #4CAF50;"/>
+                                        </div>
+                                        <strong>
+                                            <t t-esc="str(employee['rounded_a']) + '%'"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-set="width"
+                                       t-value="str(employee['task']) + 'px'"/>
+                                    <div style="display: flex;">
+                                        <div style="width: 100px; height: 20px; border: 0px solid;background-color: lightgrey;overflow: hidden;">
+                                            <div t-attf-style="width: {{width}}; height: 20px; background-color: #4CAF50;"/>
+                                        </div>
+                                        <strong>
+                                            <t t-esc="str(employee['rounded_t']) + '%'"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-set="width"
+                                       t-value="str(employee['Performance']) + 'px'"/>
+                                    <div style="display: flex;">
+                                        <div style="width: 100px; height: 20px; border: 0px solid;background-color: lightgrey;overflow: hidden;">
+                                            <div t-attf-style="width: {{width}}; height: 20px; background-color: #4CAF50;"/>
+                                        </div>
+                                        <strong>
+                                            <t t-esc="str(employee['rounded']) + '%'"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+    <record id="action_employees_all_performance_report_pdf"
+            model="ir.actions.report">
+        <field name="name">All Performance</field>
+        <field name="model">hr.employee</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">ks_website_snippets.report_all_employee</field>
+        <field name="report_file">ks_website_snippets.report_all_employee</field>
+        <field name="print_report_name">'Employee Performance Report - %s' %(object.name)</field>
+        <field name="binding_type">report</field>
+        <field name="binding_model_id" ref="model_hr_employee"/>
+    </record>
+    <template id="report_all_employee">
+        <t t-call="web.external_layout">
+            <t t-call="web.html_container">
+                <div class="page text-center" style="margin-bottom: 20px;">
+                    <strong>
+                        Employee Performance
+                    </strong>
+                </div>
+                <div>
+                    <table class="table table-sm o_main_table">
+                        <tr>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Employee
+                            </td>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Attendance
+                            </td>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Task
+                            </td>
+                            <td style="border: 2px solid;padding: 8px;">
+                                Performance
+                            </td>
+                        </tr>
+                        <t t-set="vals" t-value="docs.get_all_performance()"/>
+                        <t t-foreach="vals" t-as="employee">
+                            <tr>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-esc="employee['name']"/>
+                                </td>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-set="width"
+                                       t-value="str(employee['attendance']) + 'px'"/>
+                                    <div style="display: flex;">
+                                        <div style="width: 100px; height: 20px; border: 0px solid;background-color: lightgrey;overflow: hidden;">
+                                            <div t-attf-style="width: {{width}}; height: 20px; background-color: #4CAF50;"/>
+                                        </div>
+                                        <strong>
+                                            <t t-esc="str(employee['rounded_a']) + '%'"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-set="width"
+                                       t-value="str(employee['task']) + 'px'"/>
+                                    <div style="display: flex;">
+                                        <div style="width: 100px; height: 20px; border: 0px solid;background-color: lightgrey;overflow: hidden;">
+                                            <div t-attf-style="width: {{width}}; height: 20px; background-color: #4CAF50;"/>
+                                        </div>
+                                        <strong>
+                                            <t t-esc="str(employee['rounded_t']) + '%'"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                                <td style="border: 2px solid;padding: 8px;">
+                                    <t t-set="width"
+                                       t-value="str(employee['Performance']) + 'px'"/>
+                                    <div style="display: flex;">
+                                        <div style="width: 100px; height: 20px; border: 0px solid;background-color: lightgrey;overflow: hidden;">
+                                            <div t-attf-style="width: {{width}}; height: 20px; background-color: #4CAF50;"/>
+                                        </div>
+                                        <strong>
+                                            <t t-esc="str(employee['rounded']) + '%'"/>
+                                        </strong>
+                                    </div>
+                                </td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="account_journal_dashboard_kanban_view_hide_gaps_sequence" model="ir.ui.view">
+            <field name="name">account_journal_dashboard_kanban_view_hide_gaps_sequence</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//a[@name='show_sequence_holes']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    <!-- Add your fields or attributes here -->
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

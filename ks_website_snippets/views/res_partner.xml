@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+     <data>
+        <record id="web_customer_form_inherited" model="ir.ui.view">
+            <field name="name">res.partner.view.form.inherited.ks.snippet.website</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Website" name="website snippet">
+                        <group>
+                            <field name="is_web_customer"/>
+                            <field name="is_supplier"/>
+                            <field name="is_partner"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

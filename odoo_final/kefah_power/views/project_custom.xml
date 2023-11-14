@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Customize View -->
+        <record id="hr_form_view" model="ir.ui.view">
+            <field name="name">project.project.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="is_check" force_save="True"/>
+                    <field name="sale_order_project_id"  />
+                </xpath>
+          <xpath expr="//page[@name='description']" position="attributes">
+                    <attribute name="string">Contract Information</attribute>
+                </xpath>
+                <xpath expr="//field[@name='description']" position="replace">
+                <group>  
+                    <group string="Data of the beneficiary of the service">
+                    <field name="instituionname"/>
+                    <field name="email"/>
+                    <field name="instituionnum"/>
+                    <field name="mobilenumber"/>
+                    <field name="contractstart"/>
+                </group>
+                <group string="Contract data">
+                    <field name="contractnumber"/>
+                    <field name="contractname"/>
+                    <field name="valueaadded"/>
+                    <field name="contractend"/>
+                    </group>
+                    </group>
+                    <group string="Description And Attachment ">
+                    <group >
+                       <field name="aboutthecontract"/> 
+                    </group>
+                    <group>
+                     <field name="multi_contract" widget="many2many_binary" />
+                    </group>
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='privacy_visibility']" position="after">
+                    <group string='import'>
+                        <field name='import_file'/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='date_start']" position="attributes">
+                    <attribute name="attrs"> {'required': [('state', '=', 'confirm')]}</attribute>
+                </xpath>
+
+                 <xpath expr="//field[@name='date']" position="attributes">
+                    <attribute name="attrs"> {'required': [('state', '=', 'confirm')]}</attribute>
+                </xpath>
+
+                    <xpath expr="//field[@name='label_tasks']" position="attributes">
+                        <attribute name="invisible">1</attribute>
+                    </xpath>
+                
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="get_analytic" icon="fa-money" attrs="{'invisible': [('is_check', '=', False)]}"> 
+                        <field name="cost_count" string="Gross" widget="statinfo" />
+                    </button>
+                </div>
+
+                <xpath expr="/form/header/button[@name=%(project.project_share_wizard_action)d]" position="replace">
+                <button name="action_confirm" string="Confirm" states="draft" type="object"  class="oe_highlight" />
+                <button name="action_run" string="Run" type="object" states="confirm" class="oe_highlight" />
+                <button name="action_close" string="Close" type="object" states="run" class="btn-danger"/>
+                <button name="action_reset_draft" string="Reset To Draft" type="object" states="run,confirm,cancel"  class="oe_highlight" />
+                <button name="action_cancel" string="Cancel" type="object" confirm="Are you Sure To Cancel This Project" states="confirm,run" class="btn-warning"/>
+                <field name="state" widget="statusbar" statusbar_visible="draft,confirm,run,close,cancel" />
+                </xpath>
+
+                <button name="%(project.project_share_wizard_action)d" position="attributes">
+                <attribute name="invisible">1</attribute>
+                </button>
+                <xpath expr="//notebook/page[@name='description']" position="after">
+                    <page string="Staff In Project" attrs="{'invisible': [('is_check', '=', False)]}">
+                     <field name="staff_ids">
+                        <tree editable="tree">
+                            <field name="employee_id" options="{'no_create': True}" attrs="{'readonly': [('parent.state', '!=', 'draft')]}"/>
+                            <field name="identification_no" force_save="True" readonly="True"/>
+                            <field name="job_position_id" force_save="True" invisible="True"/>
+                            <field name="all_keffah_line_ids" required="True" options="{'no_create': True}" attrs="{'readonly': [('parent.state', '!=', 'draft')]}"/>
+                            <field name="department_id" domain="[('id','in',test_ids)]" attrs="{'readonly': [('parent.state', '!=', 'draft')]}"/>
+                            <field name="test_ids" invisible="1"/>
+                            <field name="working_hours" attrs="{'readonly': [('parent.state', '!=', 'draft')]}" invisible ='True'/>
+                            <field name="laborer_status" readonly="True"/>
+                        </tree>
+                     </field>
+                    </page>
+                    <page string="Sale Order" attrs="{'invisible': [('is_check', '=', False)]}">
+                     <field name="order_ids" string="Order Lines">
+                            <tree editable="tree">
+                            <field name="resale" force_save='True' readonly="True" />
+                            <field name="product_template_id" force_save='True' readonly="True"/>
+                            <field name="working_days" force_save='True' readonly="True"/>
+                            <field name="working_hours" force_save='True' readonly="True"/>
+                            <field name="quantity"  force_save='True' readonly="True"/>
+                            <field name="price_unit"  force_save='True' />
+                            <field name="total_monthly"  force_save='True' readonly="True" />
+                            <field name="working_month"  force_save='True' readonly="True" />
+                            <field name="price_subtotal"  force_save='True' readonly="True" invisible="True" />
+                            <field name="ot_percent" force_save='True' invisible="True" options="{'currency_field': 'currency_id'}" />
+                            </tree>
+                     </field>
+                    </page>
+                     <page string="TimeSheet Details"  attrs="{'invisible': [('is_check', '=', False)]}">
+                    <separator string="TimeSheet" colspan="4"/>
+                    <field name="sheet_ids" >
+                      <tree editable="tree" create="false">
+                        <field name="data_request"/>
+                        <field name="split"/>
+                        <field name="ot_line_subtotal"/>
+                        <field name="salary_line_subtotal"/>
+                        <field name="ot_salary_subtotal"/>
+                      </tree>
+                    </field>
+                    <group string='Selling Price' col="4">
+                     <field name="project_income" options="{'color_field': 'color'}"/>
+                    </group>  
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="keffah_TimeSheet_keffah_action">
+            <field name="name">TimeSheet</field>
+            <field name="res_model">time.sheet.details</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first TimeSheet
+                </p>
+            </field>
+        </record>
+
+     <record id="view_department_department_keffah_tree" model="ir.ui.view">
+            <field name="name">department.department.keffah.tree</field>
+            <field name="model">department.department.keffah</field>
+            <field name="arch" type="xml">
+                <tree string="Department">
+                    <field name="company_name_id"/>
+                    <field name="data_request"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_department_department_keffah_form" model="ir.ui.view" >
+            <field name="name">department.department.keffah.form</field>
+            <field name="model">department.department.keffah</field>
+            <field name="arch" type="xml">
+                <form string="Departments">
+                    <sheet>
+                        <group>
+                        <group>
+                            <field name="company_name_id" options="{'no_create': True}" required="True"/>
+                        </group>
+                        <group>
+                            <field name="data_request" readonly="True"/>
+                        </group>
+                        </group>
+                        <notebook>
+                            <page string="Department">
+                                <field name="department_ids">
+                                    <tree editable="tree" create="true">
+                                        <field name="name_english" required="True"/>
+                                        <field name="name_arabic" required="True"/>
+                                    </tree>
+                                </field>
+                            </page>
+                         </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
+                     </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="keffah_department_action">
+            <field name="name">Departments</field>
+            <field name="res_model">department.department.keffah</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Create the first Department
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+ 

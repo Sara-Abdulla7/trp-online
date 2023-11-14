@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="product_snippets" inherit_id="website.snippets"
+              priority="8">
+        <xpath expr="//div[@id='snippet_effect']//t[@t-snippet][last()]"
+               position="after">
+            <t t-snippet="ks_website_snippets.s_special_snippets"/>
+            <t t-snippet="ks_website_snippets.hierarchy_special_snippets"/>
+            <t t-snippet="ks_website_snippets.s_supplier_snippets"/>
+            <t t-snippet="ks_website_snippets.partners_special_snippets"/>
+            <t t-snippet="ks_website_snippets.employee_of_the_month_snippets"/>
+        </xpath>
+    </template>
+</odoo>
